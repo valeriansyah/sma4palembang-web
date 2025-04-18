@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Profil SMA Negeri 4 Palembang</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f2f6ff;
+      color: #333;
+      transition: background-color 0.5s, color 0.5s;
+    }
+
+    header {
+      background-color: #1d3557;
+      color: white;
+      padding: 40px 20px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      border-bottom: 5px solid #0d1b2a;
+    }
+
+    header h1 {
+      font-size: 36px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      background-color: #ffffff;
+      padding: 15px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #1d3557;
+      font-weight: bold;
+      padding: 10px 18px;
+      border-radius: 10px;
+      transition: all 0.3s ease;
+    }
+
+    nav a:hover {
+      background-color: #1d3557;
+      color: white;
+    }
+
+    .theme-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background-color: #1d3557;
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 25px;
+      cursor: pointer;
+      font-size: 16px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s ease;
+      z-index: 999;
+    }
+
+    .theme-toggle:hover {
+      background-color: #0d1b2a;
+    }
+
+    .hero {
+      height: 40vh;
+      background: url('Gambar Sma/Profile .jpg') no-repeat center center/cover;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      text-align: center;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    .hero h1 {
+      color: #fff;
+      z-index: 1;
+      font-size: 36px;
+      text-shadow: 2px 2px 6px rgba(0,0,0,0.5);
+      padding: 0 20px;
+    }
+
+    .content {
+      width: 100%;
+      padding: 60px 80px;
+      background: white;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    .content h2 {
+      font-size: 32px;
+      color: #1d3557;
+      margin-bottom: 30px;
+      text-align: center;
+    }
+
+    .content p, .content ul li {
+      font-size: 18px;
+      margin-bottom: 15px;
+    }
+
+    .content p strong {
+      color: #1d3557;
+    }
+
+    .content ul {
+      margin-top: 10px;
+      padding-left: 20px;
+    }
+
+    .btn {
+      display: inline-block;
+      margin-top: 40px;
+      background-color: #1d3557;
+      color: white;
+      padding: 14px 30px;
+      border: none;
+      border-radius: 10px;
+      text-decoration: none;
+      font-size: 16px;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      background-color: #0d1b2a;
+      transform: scale(1.05);
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px 0;
+      background-color: #bdc3c7;
+      color: #2c3e50;
+      margin-top: 60px;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    /* Dark Mode Styles */
+    body.dark-mode {
+      background-color: #121212;
+      color: white;
+    }
+
+    body.dark-mode header,
+    body.dark-mode nav,
+    body.dark-mode .content,
+    body.dark-mode footer {
+      background-color: #1a1a1a;
+      color: white;
+    }
+
+    body.dark-mode nav a {
+      color: white;
+    }
+
+    body.dark-mode nav a:hover {
+      background-color: #333;
+      color: #ffd700;
+    }
+
+    body.dark-mode .btn {
+      background-color: #444;
+      color: white;
+    }
+
+    body.dark-mode .btn:hover {
+      background-color: #666;
+    }
+
+    @media (max-width: 768px) {
+      .hero {
+        height: 30vh;
+      }
+
+      .hero h1 {
+        font-size: 24px;
+      }
+
+      .content {
+        padding: 40px 20px;
+      }
+
+      .content h2 {
+        font-size: 24px;
+      }
+
+      .content p, .content ul li {
+        font-size: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <button class="theme-toggle" onclick="toggleTheme()">🌙 Dark Mode</button>
+
+  <header>
+    <h1>Profil SMA Negeri 4 Palembang</h1>
+  </header>
+
+  <nav>
+    <a href="index.html">Beranda</a>
+    <a href="Lokasi.html">Lokasi Sekolah</a>
+    <a href="Kontak.html">Kontak</a>
+  </nav>
+
+  <div class="hero">
+    <h1>Selamat Datang di SMA Negeri 4 Palembang</h1>
+  </div>
+
+  <div class="content">
+    <h2>Profil Sekolah</h2>
+    <p><strong>Nama Sekolah:</strong> SMA Negeri 4 Palembang</p>
+    <p><strong>Alamat:</strong> Jl. Ki Anwar Mangku, Sentosa, Kec. Seberang Ulu II, Kota Palembang, Sumatera Selatan 30267</p>
+    <p><strong>Akreditasi:</strong> A</p>
+    <p><strong>Status:</strong> Negeri</p>
+    <p><strong>Jenjang:</strong> Sekolah Menengah Atas (SMA)</p>
+
+    <p><strong>Visi Sekolah:</strong></p>
+    <p>Mengembangkan potensi siswa secara optimal di bidang Imtaq (Iman dan Taqwa) dan Iptek (Ilmu Pengetahuan dan Teknologi).</p>
+
+    <p><strong>Misi Sekolah:</strong></p>
+    <ul>
+      <li>Meningkatkan kualitas iman dan taqwa.</li>
+      <li>Menumbuhkembangkan budaya belajar yang kompetitif dan kreatif.</li>
+      <li>Meningkatkan sarana dan prasarana pendidikan berbasis teknologi.</li>
+      <li>Menjalin kemitraan dengan masyarakat dan lembaga terkait.</li>
+    </ul>
+
+    <a href="Beranda.html" class="btn">Kembali ke Beranda</a>
+  </div>
+
+  <footer>
+    &copy; 2025 SMA Negeri 4 Palembang. All rights reserved.
+  </footer>
+
+  <script>
+    function toggleTheme() {
+      document.body.classList.toggle("dark-mode");
+      const themeButton = document.querySelector(".theme-toggle");
+      if (document.body.classList.contains("dark-mode")) {
+        themeButton.textContent = "🌞 Light Mode";
+      } else {
+        themeButton.textContent = "🌙 Dark Mode";
+      }
+    }
+  </script>
+
+</body>
+</html>
