@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard SMA Negeri 4 Palembang</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f6ff;
+            color: #333;
+            transition: background-color 0.5s;
+        }
+
+        header {
+            background-color: #1d3557;
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-bottom: 5px solid #0d1b2a;
+        }
+
+        header h1 {
+            font-size: 36px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            background-color: #ffffff;
+            padding: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #1d3557;
+            font-weight: bold;
+            padding: 10px 18px;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        nav a:hover {
+            background-color: #1d3557;
+            color: white;
+        }
+
+        section {
+            padding: 40px 20px;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+        }
+
+        .card {
+            background-color: white;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 30px 25px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-icon {
+            font-size: 40px;
+            color: #1d3557;
+            margin-bottom: 20px;
+        }
+
+        .card h3 {
+            margin: 0 0 15px;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .card p {
+            font-size: 16px;
+            color: #555;
+        }
+
+        .card a {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 20px;
+            background-color: #1d3557;
+            color: white;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .card a:hover {
+            background-color: #0d1b2a;
+            transform: scale(1.05);
+        }
+
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #1d3557;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            background-color: #0d1b2a;
+        }
+
+        .chart-container {
+            margin-top: 50px;
+            background-color: white;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+        }
+
+        .social-sidebar {
+            position: fixed;
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            background-color: rgba(29, 53, 87, 0.95);
+            padding: 15px 10px;
+            border-radius: 0 12px 12px 0;
+            box-shadow: 2px 4px 12px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+        }
+
+        .social-sidebar a {
+            color: white;
+            font-size: 22px;
+            text-align: center;
+            transition: transform 0.2s ease, color 0.3s;
+        }
+
+        .social-sidebar a:hover {
+            transform: scale(1.2);
+            color: #ffd700;
+        }
+
+        .map-info-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .map-box {
+            flex: 1 1 60%;
+            min-width: 300px;
+        }
+
+        .info-box {
+            flex: 1 1 35%;
+            background-color: white;
+            padding: 20px 25px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            color: #333;
+        }
+
+        .info-box h3,
+        .info-box h4 {
+            margin-top: 0;
+            color: #1d3557;
+        }
+
+        .info-box a {
+            text-decoration: none;
+            color: #1d3557;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .info-box a:hover {
+            color: #0d1b2a;
+        }
+
+        /* Dark Mode */
+        body.dark-mode {
+            background-color: #121212;
+            color: white;
+        }
+
+        body.dark-mode header,
+        body.dark-mode .card,
+        body.dark-mode nav,
+        body.dark-mode .info-box {
+            background-color: #1a1a1a;
+        }
+
+        body.dark-mode .card a,
+        body.dark-mode .theme-toggle,
+        body.dark-mode .info-box a {
+            background-color: #444;
+            color: white;
+        }
+
+        body.dark-mode .card-icon {
+            color: #fca311;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 28px;
+            }
+
+            .cards {
+                grid-template-columns: 1fr;
+            }
+
+            .social-sidebar {
+                flex-direction: row;
+                top: auto;
+                bottom: 0;
+                left: 50%;
+                transform: translateX(-50%);
+                border-radius: 12px 12px 0 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="social-sidebar">
+        <a href="https://www.facebook.com/share/1EM5Fk2VZw/" target="_blank" title="Facebook">
+            <i class="fab fa-facebook-f"></i>
+        </a>
+        <a href="https://www.instagram.com/smanepa.plg?igsh=MXBqbmhpcTluNDNw" target="_blank" title="Instagram">
+            <i class="fab fa-instagram"></i>
+        </a>
+        <a href="https://youtube.com/@sman4palembang?si=sBvmJPkW84gkP-bP" target="_blank" title="YouTube">
+            <i class="fab fa-youtube"></i>
+        </a>
+    </div>
+
+    <header>
+        <h1>Dashboard Informasi Sekolah SMAN 4 Palembang</h1>
+    </header>
+
+    <nav>
+        <a href="Profile.html">Profil Sekolah</a>
+        <a href="Lokasi.html">Lokasi Sekolah</a>
+        <a href="Kontak.html">Kontak</a>
+    </nav>
+
+    <button class="theme-toggle" onclick="toggleTheme()">🌙 Dark Mode</button>
+
+    <section>
+        <h2 style="text-align: center;">Selamat Datang di Dashboard SMA Negeri 4 Palembang</h2>
+        <p style="text-align: center;">Gunakan menu di bawah untuk menjelajahi informasi terkait profil, lokasi, dan lainnya.</p>
+
+        <div class="cards">
+            <div class="card">
+                <div class="card-icon"><i class="fa-solid fa-map-location-dot"></i></div>
+                <h3>Lokasi</h3>
+                <p>Lihat lokasi SMA Negeri 4 Palembang</p>
+                <a href="Lokasi.html">Lihat</a>
+            </div>
+
+            <div class="card">
+                <div class="card-icon"><i class="fa-solid fa-school"></i></div>
+                <h3>Profil Sekolah</h3>
+                <p>Sejarah, visi misi, akreditasi, dan informasi sekolah lainnya.</p>
+                <a href="Profile.html">Lihat</a>
+            </div>
+
+            <div class="card">
+                <div class="card-icon"><i class="fa-solid fa-phone-volume"></i></div>
+                <h3>Kontak Sekolah</h3>
+                <p>Hubungi kontak sekolah kami untuk informasi lebih lanjut.</p>
+                <a href="Kontak.html">Lihat</a>
+            </div>
+        </div>
+
+        <div class="chart-container">
+            <canvas id="myChart" width="400" height="200"></canvas>
+        </div>
+    </section>
+
+    <section id="lokasi" class="map-section">
+        <h2>Lokasi SMA Negeri 4 Palembang</h2>
+        <div class="map-info-wrapper">
+            <div class="map-box">
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4373.429796890992!2d104.80529991094896!3d-3.0043305399057085!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e3b9d7a872dd06d%3A0x7cb78aa8a72383df!2sSMA%20Negeri%204%20Palembang!5e1!3m2!1sid!2sid!4v1744988427886!5m2!1sid!2sid" 
+                    width="100%" 
+                    height="450" 
+                    style="border:0;" 
+                    allowfullscreen="" 
+                    loading="lazy" 
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+            <div class="info-box">
+                <h3>Kontak Sekolah</h3>
+                <p><strong>Alamat:</strong><br>Jl. Ki Anwar Mangku, Sentosa, Kec. Seberang Ulu II, Kota Palembang, Sumatera Selatan 30267</p>
+                <p><strong>Telepon:</strong><br>(0711) 514429</p>
+                <p><strong>Email:</strong><br>sman4plg@gmail.com</p>
+                <h4>Media Sosial:</h4>
+                <p>
+                    <a href="https://www.facebook.com/share/1EM5Fk2VZw/" target="_blank">📘 Facebook</a><br>
+                    <a href="https://www.instagram.com/smanepa.plg?igsh=MXBqbmhpcTluNDNw" target="_blank">📷 Instagram</a><br>
+                    <a href="https://youtube.com/@sman4palembang?si=sBvmJPkW84gkP-bP" target="_blank">▶️ YouTube</a>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        function toggleTheme() {
+            document.body.classList.toggle("dark-mode");
+            const themeButton = document.querySelector(".theme-toggle");
+            if (document.body.classList.contains("dark-mode")) {
+                themeButton.textContent = "🌞 Light Mode";
+            } else {
+                themeButton.textContent = "🌙 Dark Mode";
+            }
+        }
+        window.addEventListener("DOMContentLoaded", function () {
+            const chartContainer = document.querySelector(".chart-container");
+            if (chartContainer) {
+                chartContainer.style.display = "none";
+            }
+        });
+    </script>
+</body>
+</html>
